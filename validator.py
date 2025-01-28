@@ -12,7 +12,8 @@ prompt = "API威胁检测装置是什么？"
 models = [
     "qwen2",
     "mistral",
-    "wizardlm2"
+    "wizardlm2",
+    "deepseek-r1"
 #    "bge_m3"  # 替换为你的实际模型名称
 ]
 results = []
