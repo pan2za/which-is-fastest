@@ -3,6 +3,7 @@ import json
 
 OLLAMA_HOST = 'http://localhost:11434'
 MODEL_NAME = 'deepseek-r1'
+MODEL_NAME = 'deepseek-coder-v2:16b-lite-instruct-q5_K_M'
 
 def parse_response(buffer):
     """解析带<think>标记的响应内容"""
