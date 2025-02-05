@@ -1,9 +1,16 @@
 import requests
 import json
+import time
+import jieba
 
 OLLAMA_HOST = 'http://localhost:11434'
 MODEL_NAME = 'deepseek-r1'
 MODEL_NAME = 'deepseek-coder-v2:16b-lite-instruct-q5_K_M'
+
+elapsed_time = 0.0
+# 记录开始时间
+start_time = time.time()
+
 
 def parse_response(buffer):
     """解析带<think>标记的响应内容"""
@@ -27,6 +34,10 @@ def chat_with_ollama():
     
     while True:
         try:
+            elapsed_time = 0.0
+            # 记录开始时
+            start_time = time.time()
+
             user_input = input("用户: ")
             if user_input.lower() in ['exit', 'quit']:
                 break
@@ -79,6 +90,10 @@ def chat_with_ollama():
                 print(f"\n<思考过程>\n{think_content}\n</思考过程>")
             if response_content:
                 print(f"\n<最终回复>\n{response_content}\n</回复结束>")
+                elapsed_time = time.time() - start_time
+                words = jieba.lcut(response_content)
+                word_count = len(words)
+                print(f"这段文字中包含的词语数量是：{word_count}, speed: {word_count/elapsed_time} ")
 
         except Exception as e:
             print(f"\n发生错误: {str(e)}")
